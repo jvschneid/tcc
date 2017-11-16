@@ -37,15 +37,33 @@ class Net(nn.Module):
 
 
 net = Net()
-#print(net)
+print(net)
 
 params = list(net.parameters())
-#print(len(params))
-#print(params[0].size())
+print(len(params))
+print(params[0].size())
 
 input = Variable(torch.randn(1, 1, 32, 32))
 out = net(input)
-#print(out)
+
+#net.zero_grad()
+#out.backward(torch.randn(1, 10))
+
+target = Variable(torch.arange(1, 11))
+criterion = nn.MSELoss()
+
+loss = criterion(out, target)
+print(loss)
+print(loss.grad_fn)
+print(loss.grad_fn.next_functions[0][0])
+print(loss.grad_fn.next_functions[0][0].next_functions[0][0])
 
 net.zero_grad()
-out.backward(torch.randn(1, 10))
+
+print('conv1.bias.grad before backward')
+print(net.conv1.bias.grad)
+
+loss.backward()
+
+print('conv1.bias.grad after backward')
+print(net.conv1.bias.grad)
