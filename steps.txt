@@ -7,7 +7,18 @@
 	1.5 Pytorch
 
 2. Keras Tutorial
+	2.1 Basics
+	2.2 Layers
+	2.3 Input & Output
 
 	
+3. PyTorch Tutorial
 
 3. Paper Reading
+	3.1 Larsen
+	3.2 Sjoberg
+	3.3 Dropout
+
+	3.4 MLP
+	3.5 LSTM
+	3.6 VGG ConvNet
