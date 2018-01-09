@@ -6,4 +6,8 @@
 	1.4 Keras
 	1.5 Pytorch
 
-2. Pytorch Tutorial
+2. Keras Tutorial
+
+	
+
+3. Paper Reading
