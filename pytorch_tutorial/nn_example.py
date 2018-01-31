@@ -18,7 +18,7 @@ class Net(nn.Module):
         self.fc3 = nn.Linear(84, 10)
 
     def forward(self, x):
-        	# Max pooling over a (2, 2) window
+        # Max pooling over a (2, 2) window
         x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
         # If the size is a square you can only specify a single number
         x = F.max_pool2d(F.relu(self.conv2(x)), 2)
@@ -35,35 +35,50 @@ class Net(nn.Module):
             num_features *= s
         return num_features
 
-
+# Initialize net
 net = Net()
-print(net)
 
+# Visualize net
+"""
+print(net)
+"""
+
+# Visualize parameters
+"""
 params = list(net.parameters())
 print(len(params))
 print(params[0].size())
+"""
 
+# Forward pass
 input = Variable(torch.randn(1, 1, 32, 32))
+"""
 out = net(input)
+print(out)
 
-#net.zero_grad()
-#out.backward(torch.randn(1, 10))
+net.zero_grad()
+out.backward(torch.randn(1, 10))
+"""
 
+# Loss
+output = net(input)
 target = Variable(torch.arange(1, 11))
 criterion = nn.MSELoss()
 
-loss = criterion(out, target)
+loss = criterion(output, target)
+print(output)
+print(target)
 print(loss)
-print(loss.grad_fn)
-print(loss.grad_fn.next_functions[0][0])
-print(loss.grad_fn.next_functions[0][0].next_functions[0][0])
 
+print(loss.grad_fn)  # MSELoss
+print(loss.grad_fn.next_functions[0][0])  # Linear
+print(loss.grad_fn.next_functions[0][0].next_functions[0][0])  # ReLU
+
+# Back Prop
 net.zero_grad()
 
-print('conv1.bias.grad before backward')
 print(net.conv1.bias.grad)
 
 loss.backward()
 
-print('conv1.bias.grad after backward')
 print(net.conv1.bias.grad)

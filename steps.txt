@@ -10,7 +10,6 @@
 	2.1 Basics
 	2.2 Layers
 	2.3 Input & Output
-
 	
 3. PyTorch Tutorial
 
